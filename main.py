@@ -286,6 +286,29 @@ class ProjectManagementSystem:
         console.print("Task created successfully.", style="bold green")
 
 
+    def list_tasks(self, user, project):
+        table = Table(title=f"Tasks for Project: {project['name']}")
+        table.add_column("Task Title", justify="center")
+        table.add_column("Status", justify="center")
+        table.add_column("Priority", justify="center")
+        table.add_column("Start Time", justify="center")
+        table.add_column("End Time", justify="center")
+
+        for task in project["tasks"]:
+            table.add_row(task["title"], task["status"], task["priority"], task["start_time"], task["end_time"])
+
+        console.print(table)
+        task_title = input("Enter task title (or 'back' to go back): ")
+        if task_title == "back":
+            return
+
+        for task in project["tasks"]:
+            if task["title"] == task_title:
+                self.task_menu(user, project, task)
+                break
+
+
+
 
 
 
