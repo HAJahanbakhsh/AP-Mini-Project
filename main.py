@@ -187,6 +187,28 @@ class ProjectManagementSystem:
                 self.project_menu(user, project)
                 break
 
+    def project_menu(self, user, project):
+        while True:
+            console.print(f"[bold blue]Project: {project['name']}[/bold blue]")
+            console.print("1. Add Member")
+            console.print("2. Delete Project")
+            console.print("3. Manage Tasks")
+            console.print("4. Back")
+
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                self.add_member(user, project)
+            elif choice == "2":
+                self.delete_project(user, project)
+                break
+            elif choice == "3":
+                self.manage_tasks(user, project)
+            elif choice == "4":
+                break
+            else:
+                console.print("Invalid choice.", style="bold red")
+
+
 
 
 
