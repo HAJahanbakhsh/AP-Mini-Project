@@ -373,6 +373,30 @@ class ProjectManagementSystem:
         console.print("Comment added successfully.", style="bold green")
 
 
+    def assign_member_to_task(self, user, project, task):
+        if user.username != project["owner"]:
+            console.print("Only the project owner can assign members to tasks.", style="bold red")
+            return
+
+        assignee = input("Enter username of the member to assign: ")
+        if assignee in project["members"]:
+            if assignee not in task["assignees"]:
+                task["assignees"].append(assignee)
+                self.save_data(self.data)
+                console.print("Member assigned to task successfully.", style="bold green")
+            else:
+                console.print("Member is already assigned to this task.", style="bold red")
+        else:
+            console.print("User is not a member of this project.", style="bold red")
+
+
+if __name__ == "__main__":
+    pms = ProjectManagementSystem()
+    while True:
+        pms.main_menu()
+
+
+
 
 
 
