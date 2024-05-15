@@ -116,6 +116,29 @@ class ProjectManagementSystem:
             with open('data.json', 'r') as file:
                 return json.load(file)
         return {"users": [], "projects": []}
+        
+
+     @staticmethod
+    def save_data(data):
+        with open('data.json', 'w') as file:
+            json.dump(data, file, indent=4)
+            
+
+    def main_menu(self):
+        console.print("[bold blue]Project Management System[/bold blue]")
+        console.print("1. Register")
+        console.print("2. Login")
+
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            User.register()
+        elif choice == "2":
+            user = User.login()
+            if user:
+                self.user_menu(user)
+        else:
+            console.print("Invalid choice.", style="bold red")
+
 
 
 
