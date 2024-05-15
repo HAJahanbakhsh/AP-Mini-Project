@@ -8,6 +8,24 @@ from rich.table import Table
 from enum import Enum
 import bcrypt
 
+console = Console()
+
+
+class Priority(Enum):
+    CRITICAL = "CRITICAL"
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+
+
+class Status(Enum):
+    BACKLOG = "BACKLOG"
+    TODO = "TODO"
+    DOING = "DOING"
+    DONE = "DONE"
+    ARCHIVED = "ARCHIVED"
+
+
 class User:
     def __init__(self, email, username, password, active=True):
         self.email = email
@@ -54,6 +72,21 @@ class User:
 
         console.print("Incorrect username or password.", style="bold red")
         return None
+
+
+class Task:
+    def __init__(self, title, description, start_time, end_time, priority=Priority.LOW.value, status=Status.BACKLOG.value):
+        self.id = str(uuid.uuid4())
+        self.title = title
+        self.description = description
+        self.start_time = start_time
+        self.end_time = end_time
+        self.priority = priority
+        self.status = status
+        self.assignees = []
+        self.comments = []
+
+
 
 
 
