@@ -208,6 +208,37 @@ class ProjectManagementSystem:
             else:
                 console.print("Invalid choice.", style="bold red")
 
+    def add_member(self, user, project):
+        if project["owner"] != user.username:
+            console.print("Only the project owner can add members.", style="bold red")
+            return
+
+        username = input("Enter new member username: ")
+
+        for member in project["members"]:
+            if member == username:
+                console.print("The user is already a member of the project.", style="bold red")
+                return
+
+        for u in self.data["users"]:
+            if u["username"] == username:
+                project["members"].append(username)
+                self.save_data(self.data)
+                console.print("New member added successfully.", style="bold green")
+                return
+
+        console.print("User not found.", style="bold red")
+
+    def delete_project(self, user, project):
+        if project["owner"] != user.username:
+            console.print("Only the project owner can delete the project.", style="bold red")
+            return
+
+        self.data["projects"] = [p for p in self.data["projects"] if p["id"] != project["id"]]
+        self.save_data(self.data)
+        console.print("Project deleted successfully.", style="bold green")
+
+
 
 
 
