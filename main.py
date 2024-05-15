@@ -163,6 +163,29 @@ class ProjectManagementSystem:
         self.data["projects"].append(new_project.__dict__)
         self.save_data(self.data)
         console.print("Project created successfully.", style="bold green")
+        
+    def list_projects(self, user):
+        table = Table(title="Projects")
+        table.add_column("Project Name", justify="center")
+        table.add_column("Role", justify="center")
+
+        user_projects = [project for project in self.data["projects"] if project["owner"] == user.username or user.username in project["members"]]
+
+        for project in user_projects:
+            role = "Member"
+            if project["owner"] == user.username:
+                role = "Owner"
+            table.add_row(project["name"], role)
+
+        console.print(table)
+        project_name = input("Enter project name (or 'back' to go back): ")
+        if project_name == "back":
+            return
+
+        for project in user_projects:
+            if project["name"] == project_name:
+                self.project_menu(user, project)
+                break
 
 
 
