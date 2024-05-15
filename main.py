@@ -255,6 +255,37 @@ class ProjectManagementSystem:
             else:
                 console.print("Invalid choice.", style="bold red")
 
+    def create_task(self, user, project):
+        if user.username != project["owner"]:
+            console.print("Only the project owner can create tasks.", style="bold red")
+            return
+
+        task_id = str(uuid.uuid4())
+        title = input("Task Title: ")
+        description = input("Task Description: ")
+        start_time = datetime.now().isoformat()
+        end_time = (datetime.now() + timedelta(hours=24)).isoformat()
+        priority = Priority.LOW.value
+        status = Status.BACKLOG.value
+        
+        new_task = {
+            "id": task_id,
+            "title": title,
+            "description": description,
+            "start_time": start_time,
+            "end_time": end_time,
+            "assignees": [],
+            "priority": priority,
+            "status": status,
+            "comments": [],
+            
+        }
+
+        project["tasks"].append(new_task)
+        self.save_data(self.data)
+        console.print("Task created successfully.", style="bold green")
+
+
 
 
 
