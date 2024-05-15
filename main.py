@@ -106,6 +106,16 @@ class Project:
 
 
 
+class ProjectManagementSystem:
+    def __init__(self):
+        self.data = self.load_data()
+
+    @staticmethod
+    def load_data():
+        if os.path.exists('data.json'):
+            with open('data.json', 'r') as file:
+                return json.load(file)
+        return {"users": [], "projects": []}
 
 
 
