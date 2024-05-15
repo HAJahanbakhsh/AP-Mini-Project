@@ -331,6 +331,21 @@ class ProjectManagementSystem:
                 console.print("Invalid choice.", style="bold red")
 
 
+    def change_status(self, user, project, task):
+        if user.username != project["owner"] and user.username not in task["assignees"]:
+            console.print("Only the project owner or assigned members can change the task status.", style="bold red")
+            return
+
+        console.print("Available statuses: BACKLOG, TODO, DOING, DONE, ARCHIVED")
+        new_status = input("Enter new status: ").upper()
+        if new_status in Status.__members__:
+            task["status"] = new_status
+            self.save_data(self.data)
+            console.print("Task status updated successfully.", style="bold green")
+        else:
+            console.print("Invalid status.", style="bold red")
+
+
 
 
 
