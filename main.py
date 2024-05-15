@@ -307,6 +307,29 @@ class ProjectManagementSystem:
                 self.task_menu(user, project, task)
                 break
 
+    def task_menu(self, user, project, task):
+        while True:
+            console.print(f"[bold blue]Task: {task['title']}[/bold blue]")
+            console.print("1. Change Status")
+            console.print("2. Change Priority")
+            console.print("3. Add Comment")
+            console.print("4. Assign Member")
+            console.print("5. Back")
+
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                self.change_status(user, project, task)
+            elif choice == "2":
+                self.change_priority(user, project, task)
+            elif choice == "3":
+                self.add_comment(user, project, task)
+            elif choice == "4":
+                self.assign_member_to_task(user, project, task)
+            elif choice == "5":
+                break
+            else:
+                console.print("Invalid choice.", style="bold red")
+
 
 
 
