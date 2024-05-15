@@ -140,22 +140,30 @@ class ProjectManagementSystem:
             console.print("Invalid choice.", style="bold red")
 
 
-        def user_menu(self, user):
-            while True:
-                console.print(f"[bold blue]Welcome, {user.username}[/bold blue]")
-                console.print("1. Create Project")
-                console.print("2. View Projects")
-                console.print("3. Logout")
+    def user_menu(self, user):
+        while True:
+            console.print(f"[bold blue]Welcome, {user.username}[/bold blue]")
+            console.print("1. Create Project")
+            console.print("2. View Projects")
+            console.print("3. Logout")
 
-                choice = input("Enter your choice: ")
-                if choice == "1":
-                    self.create_project(user)
-                elif choice == "2":
-                    self.list_projects(user)
-                elif choice == "3":
-                    break
-                else:
-                    console.print("Invalid choice.", style="bold red")
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                self.create_project(user)
+            elif choice == "2":
+                self.list_projects(user)
+            elif choice == "3":
+                break
+            else:
+                console.print("Invalid choice.", style="bold red")
+
+    def create_project(self, user):
+        project_name = input("Project Name: ")
+        new_project = Project(project_name, user.username)
+        self.data["projects"].append(new_project.__dict__)
+        self.save_data(self.data)
+        console.print("Project created successfully.", style="bold green")
+
 
 
 
