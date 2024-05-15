@@ -36,3 +36,26 @@ class User:
         data["users"].append(new_user.__dict__)
         ProjectManagementSystem.save_data(data)
         console.print("User account created successfully.", style="bold green")
+        
+
+    @staticmethod
+    def login():
+        data = ProjectManagementSystem.load_data()
+        username = input("Username: ")
+        password = input("Password: ")
+
+        for user_data in data["users"]:
+            if user_data["username"] == username and bcrypt.checkpw(password.encode('utf-8'), user_data["password"].encode('utf-8')):
+                if not user_data["active"]:
+                    console.print("Your account is inactive.", style="bold red")
+                    return None
+                console.print("Login successful.", style="bold green")
+                return User(**user_data)
+
+        console.print("Incorrect username or password.", style="bold red")
+        return None
+
+
+
+
+
