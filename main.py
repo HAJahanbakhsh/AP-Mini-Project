@@ -361,6 +361,19 @@ class ProjectManagementSystem:
             console.print("Invalid priority.", style="bold red")
 
 
+    def add_comment(self, user, project, task):
+        comment = input("Enter your comment: ")
+        new_comment = {
+            "username": user.username,
+            "comment": comment,
+            "timestamp": datetime.now().isoformat()
+        }
+        task["comments"].append(new_comment)
+        self.save_data(self.data)
+        console.print("Comment added successfully.", style="bold green")
+
+
+
 
 
 
