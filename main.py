@@ -346,6 +346,22 @@ class ProjectManagementSystem:
             console.print("Invalid status.", style="bold red")
 
 
+    def change_priority(self, user, project, task):
+        if user.username != project["owner"] and user.username not in task["assignees"]:
+            console.print("Only the project owner or assigned members can change the task priority.", style="bold red")
+            return
+
+        console.print("Available priorities: CRITICAL, HIGH, MEDIUM, LOW")
+        new_priority = input("Enter new priority: ").upper()
+        if new_priority in Priority.__members__:
+            task["priority"] = new_priority
+            self.save_data(self.data)
+            console.print("Task priority updated successfully.", style="bold green")
+        else:
+            console.print("Invalid priority.", style="bold red")
+
+
+
 
 
 
