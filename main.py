@@ -238,6 +238,24 @@ class ProjectManagementSystem:
         self.save_data(self.data)
         console.print("Project deleted successfully.", style="bold green")
 
+    def manage_tasks(self, user, project):
+        while True:
+            console.print(f"[bold blue]Manage Tasks for Project: {project['name']}[/bold blue]")
+            console.print("1. Create Task")
+            console.print("2. View Tasks")
+            console.print("3. Back")
+
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                self.create_task(user, project)
+            elif choice == "2":
+                self.list_tasks(user, project)
+            elif choice == "3":
+                break
+            else:
+                console.print("Invalid choice.", style="bold red")
+
+
 
 
 
