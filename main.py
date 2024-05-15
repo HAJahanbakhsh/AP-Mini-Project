@@ -87,6 +87,23 @@ class Task:
         self.comments = []
 
 
+class Project:
+    def __init__(self, name, owner):
+        self.id = str(uuid.uuid4())
+        self.name = name
+        self.owner = owner
+        self.tasks = []
+        self.members = [owner]
+
+    def add_member(self, username):
+        if username not in self.members:
+            self.members.append(username)
+
+    def create_task(self, title, description, start_time, end_time):
+        new_task = Task(title, description, start_time, end_time)
+        self.tasks.append(new_task.__dict__)
+        return new_task
+
 
 
 
