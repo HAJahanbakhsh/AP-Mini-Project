@@ -1,5 +1,6 @@
 import json
 import os
+import logging
 import re
 import uuid
 from datetime import datetime, timedelta
@@ -7,6 +8,13 @@ from rich.console import Console
 from rich.table import Table
 from enum import Enum
 import bcrypt
+
+logging.basicConfig(
+    filename='project_management.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 console = Console()
 
@@ -47,6 +55,7 @@ class User:
         for user in data["users"]:
             if user["email"] == email or user["username"] == username:
                 console.print("Email or username already exists.", style="bold red")
+                logger.warning("Attempt to register with existing email or username: %s, %s", email, username)
                 return
 
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
@@ -54,7 +63,7 @@ class User:
         data["users"].append(new_user.__dict__)
         ProjectManagementSystem.save_data(data)
         console.print("User account created successfully.", style="bold green")
-        
+        logger.info("New user registered: %s", username)
 
     @staticmethod
     def login():
@@ -66,11 +75,14 @@ class User:
             if user_data["username"] == username and bcrypt.checkpw(password.encode('utf-8'), user_data["password"].encode('utf-8')):
                 if not user_data["active"]:
                     console.print("Your account is inactive.", style="bold red")
+                    logger.warning("Inactive account login attempt: %s", username)
                     return None
                 console.print("Login successful.", style="bold green")
+                logger.info("User logged in: %s", username)
                 return User(**user_data)
 
         console.print("Incorrect username or password.", style="bold red")
+        logger.warning("Failed login attempt: %s", username)
         return None
 
 
@@ -105,7 +117,6 @@ class Project:
         return new_task
 
 
-
 class ProjectManagementSystem:
     def __init__(self):
         self.data = self.load_data()
@@ -116,13 +127,11 @@ class ProjectManagementSystem:
             with open('data.json', 'r') as file:
                 return json.load(file)
         return {"users": [], "projects": []}
-        
 
-     @staticmethod
+    @staticmethod
     def save_data(data):
         with open('data.json', 'w') as file:
             json.dump(data, file, indent=4)
-            
 
     def main_menu(self):
         console.print("[bold blue]Project Management System[/bold blue]")
@@ -138,7 +147,6 @@ class ProjectManagementSystem:
                 self.user_menu(user)
         else:
             console.print("Invalid choice.", style="bold red")
-
 
     def user_menu(self, user):
         while True:
@@ -163,6 +171,7 @@ class ProjectManagementSystem:
         self.data["projects"].append(new_project.__dict__)
         self.save_data(self.data)
         console.print("Project created successfully.", style="bold green")
+        logger.info("Project created: %s by %s", project_name, user.username)
         
     def list_projects(self, user):
         table = Table(title="Projects")
@@ -237,6 +246,7 @@ class ProjectManagementSystem:
         self.data["projects"] = [p for p in self.data["projects"] if p["id"] != project["id"]]
         self.save_data(self.data)
         console.print("Project deleted successfully.", style="bold green")
+        logger.info("Project deleted: %s by %s", project["name"], user.username)
 
     def manage_tasks(self, user, project):
         while True:
@@ -258,6 +268,7 @@ class ProjectManagementSystem:
     def create_task(self, user, project):
         if user.username != project["owner"]:
             console.print("Only the project owner can create tasks.", style="bold red")
+            logger.warning("Unauthorized task creation attempt by %s on project %s", user.username, project["name"])
             return
 
         task_id = str(uuid.uuid4())
@@ -284,7 +295,7 @@ class ProjectManagementSystem:
         project["tasks"].append(new_task)
         self.save_data(self.data)
         console.print("Task created successfully.", style="bold green")
-
+        logger.info("Task created: %s in project %s by %s", title, project["name"], user.username)
 
     def list_tasks(self, user, project):
         table = Table(title=f"Tasks for Project: {project['name']}")
@@ -330,10 +341,10 @@ class ProjectManagementSystem:
             else:
                 console.print("Invalid choice.", style="bold red")
 
-
     def change_status(self, user, project, task):
         if user.username != project["owner"] and user.username not in task["assignees"]:
             console.print("Only the project owner or assigned members can change the task status.", style="bold red")
+            logger.warning("Unauthorized status change attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
             return
 
         console.print("Available statuses: BACKLOG, TODO, DOING, DONE, ARCHIVED")
@@ -342,13 +353,14 @@ class ProjectManagementSystem:
             task["status"] = new_status
             self.save_data(self.data)
             console.print("Task status updated successfully.", style="bold green")
+            logger.info("Status of task %s in project %s changed to %s by %s", task["title"], project["name"],new_status, user.username)
         else:
             console.print("Invalid status.", style="bold red")
-
 
     def change_priority(self, user, project, task):
         if user.username != project["owner"] and user.username not in task["assignees"]:
             console.print("Only the project owner or assigned members can change the task priority.", style="bold red")
+            logger.warning("Unauthorized priority change attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
             return
 
         console.print("Available priorities: CRITICAL, HIGH, MEDIUM, LOW")
@@ -357,9 +369,9 @@ class ProjectManagementSystem:
             task["priority"] = new_priority
             self.save_data(self.data)
             console.print("Task priority updated successfully.", style="bold green")
+            logger.info("Priority of task %s in project %s changed to %s by %s", task["title"], project["name"],new_priority, user.username)
         else:
             console.print("Invalid priority.", style="bold red")
-
 
     def add_comment(self, user, project, task):
         comment = input("Enter your comment: ")
@@ -371,11 +383,12 @@ class ProjectManagementSystem:
         task["comments"].append(new_comment)
         self.save_data(self.data)
         console.print("Comment added successfully.", style="bold green")
-
+        logger.info("Comment added to task %s in project %s by %s", task["title"], project["name"], user.username)
 
     def assign_member_to_task(self, user, project, task):
         if user.username != project["owner"]:
             console.print("Only the project owner can assign members to tasks.", style="bold red")
+            logger.warning("Unauthorized member assignment attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
             return
 
         assignee = input("Enter username of the member to assign: ")
@@ -384,6 +397,7 @@ class ProjectManagementSystem:
                 task["assignees"].append(assignee)
                 self.save_data(self.data)
                 console.print("Member assigned to task successfully.", style="bold green")
+                logger.info("Member %s assigned to task %s in project %s by %s", assignee, task["title"],project["name"], user.username)
             else:
                 console.print("Member is already assigned to this task.", style="bold red")
         else:
