@@ -65,12 +65,14 @@ class User:
 
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
             console.print("Invalid email format. Please enter a valid email address.", style="bold red")
+            getch()
             return
 
         for user in data["users"]:
             if user["email"] == email or user["username"] == username:
                 console.print("Email or username already exists.", style="bold red")
                 logger.warning("Attempt to register with existing email or username: %s, %s", email, username)
+                getch()
                 return
 
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
@@ -78,6 +80,7 @@ class User:
         data["users"].append(new_user.__dict__)
         ProjectManagementSystem.save_data(data)
         console.print("User account created successfully.", style="bold green")
+        getch()
         logger.info("New user registered: %s", username)
 
     @staticmethod
@@ -91,13 +94,16 @@ class User:
                 if not user_data["active"]:
                     console.print("Your account is inactive.", style="bold red")
                     logger.warning("Inactive account login attempt: %s", username)
+                    getch()
                     return None
                 console.print("Login successful.", style="bold green")
                 logger.info("User logged in: %s", username)
+                getch()
                 return User(**user_data)
 
         console.print("Incorrect username or password.", style="bold red")
         logger.warning("Failed login attempt: %s", username)
+        getch()
         return None
 
 
@@ -193,6 +199,7 @@ class ProjectManagementSystem:
         self.save_data(self.data)
         console.print("Project created successfully.", style="bold green")
         logger.info("Project created: %s by %s", project_name, user.username)
+        
         
     def list_projects(self, user):
         table = Table(title="Projects")
@@ -296,6 +303,7 @@ class ProjectManagementSystem:
         if user.username != project["owner"]:
             console.print("Only the project owner can create tasks.", style="bold red")
             logger.warning("Unauthorized task creation attempt by %s on project %s", user.username, project["name"])
+            getch()
             return
 
         task_id = str(uuid.uuid4())
