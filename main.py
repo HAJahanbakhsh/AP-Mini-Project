@@ -325,7 +325,8 @@ class ProjectManagementSystem:
             console.print("2. Change Priority")
             console.print("3. Add Comment")
             console.print("4. Assign Member")
-            console.print("5. Back")
+            console.print("5. View Comments")
+            console.print("6. Back")
 
             choice = input("Enter your choice: ")
             if choice == "1":
@@ -337,6 +338,8 @@ class ProjectManagementSystem:
             elif choice == "4":
                 self.assign_member_to_task(user, project, task)
             elif choice == "5":
+                self.view_comments(task)
+            elif choice == "6":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
@@ -402,6 +405,17 @@ class ProjectManagementSystem:
                 console.print("Member is already assigned to this task.", style="bold red")
         else:
             console.print("User is not a member of this project.", style="bold red")
+
+    @staticmethod
+    def view_comments(task):
+        if not task["comments"]:
+            console.print("No comments available for this task.", style="bold red")
+        else:
+            for comment in task["comments"]:
+                console.print(
+                    f"[bold yellow]{comment['timestamp']} - {comment['username']}:[/bold yellow] {comment['comment']}")
+
+
 
 
 if __name__ == "__main__":

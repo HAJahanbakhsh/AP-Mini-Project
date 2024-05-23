@@ -1,0 +1,69 @@
+{
+    "users": [
+        {
+            "email": "abol11@gmail.com",
+            "username": "abol",
+            "password": "$2b$12$b40qDsMvIglwxDavJsYc8e/GDQf1gBHMenmHABYRkzqSbufDVyYN2",
+            "active": true
+        }
+    ],
+    "projects": [
+        {
+            "id": "352e7040-366d-4815-90f2-9cd28169e3a6",
+            "name": "mamad pro",
+            "owner": "mamad",
+            "tasks": [
+                {
+                    "id": "01d23f10-b86f-406a-8f85-dd0703fbcbce",
+                    "title": "task1",
+                    "description": "for test",
+                    "start_time": "2024-05-22T15:11:04.044472",
+                    "end_time": "2024-05-23T15:11:04.044472",
+                    "assignees": [],
+                    "priority": "HIGH",
+                    "status": "BACKLOG",
+                    "comments": []
+                }
+            ],
+            "members": [
+                "mamad"
+            ]
+        },
+        {
+            "id": "7ffd80cb-dc24-4426-9bb2-3b2598713449",
+            "name": "jj",
+            "owner": "mehrgan1",
+            "tasks": [
+                {
+                    "id": "58babf86-b667-4292-976f-adc70070915e",
+                    "title": "gg",
+                    "description": "ww",
+                    "start_time": "2024-05-23T13:44:11.538129",
+                    "end_time": "2024-05-24T13:44:11.538129",
+                    "assignees": [],
+                    "priority": "LOW",
+                    "status": "BACKLOG",
+                    "comments": [
+                        {
+                            "username": "mehrgan1",
+                            "comment": "for test1",
+                            "timestamp": "2024-05-23T13:44:44.699449"
+                        }
+                    ]
+                }
+            ],
+            "members": [
+                "mehrgan1"
+            ]
+        },
+        {
+            "id": "7fbafbb0-3b19-4e52-994e-8449c3d96050",
+            "name": "dd",
+            "owner": "mehrgan",
+            "tasks": [],
+            "members": [
+                "mehrgan"
+            ]
+        }
+    ]
+}

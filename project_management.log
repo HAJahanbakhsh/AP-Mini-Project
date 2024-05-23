@@ -1,0 +1,25 @@
+2024-05-22 15:07:10,482 - __main__ - INFO - New user registered: mamad
+2024-05-22 15:07:55,818 - __main__ - INFO - User logged in: mamad
+2024-05-22 15:08:25,615 - __main__ - INFO - Project created: mamad pro by mamad
+2024-05-22 15:11:04,046 - __main__ - INFO - Task created: task1 in project mamad pro by mamad
+2024-05-22 15:13:28,216 - __main__ - INFO - Priority of task task1 in project mamad pro changed to HIGH by mamad
+2024-05-23 13:42:45,188 - __main__ - WARNING - Failed login attempt: mamad
+2024-05-23 13:42:57,747 - __main__ - WARNING - Failed login attempt: mamad
+2024-05-23 13:43:26,237 - __main__ - INFO - New user registered: mehrgan1
+2024-05-23 13:43:38,716 - __main__ - INFO - User logged in: mehrgan1
+2024-05-23 13:43:47,723 - __main__ - INFO - Project created: jj by mehrgan1
+2024-05-23 13:44:11,539 - __main__ - INFO - Task created: gg in project jj by mehrgan1
+2024-05-23 13:44:44,701 - __main__ - INFO - Comment added to task gg in project jj by mehrgan1
+2024-05-23 13:48:08,398 - __main__ - WARNING - Failed login attempt: mehrgan1
+2024-05-23 13:51:21,550 - __main__ - INFO - New user registered: abol
+2024-05-23 13:51:45,772 - __main__ - INFO - User logged in: abol
+2024-05-23 13:55:01,670 - __main__ - WARNING - Failed login attempt: mehrgan1
+2024-05-23 13:55:22,119 - __main__ - WARNING - Failed login attempt: abol
+2024-05-23 13:56:13,616 - __main__ - INFO - New user registered: mehrgan
+2024-05-23 13:56:35,172 - __main__ - INFO - User logged in: mehrgan
+2024-05-23 13:56:48,605 - __main__ - INFO - Project created: test by mehrgan
+2024-05-23 13:57:19,672 - __main__ - INFO - Task created: test1 in project test by mehrgan
+2024-05-23 13:57:52,171 - __main__ - INFO - Comment added to task test1 in project test by mehrgan
+2024-05-23 13:58:16,641 - __main__ - INFO - Comment added to task test1 in project test by mehrgan
+2024-05-23 13:59:01,594 - __main__ - INFO - Project deleted: test by mehrgan
+2024-05-23 13:59:55,787 - __main__ - INFO - Project created: dd by mehrgan
