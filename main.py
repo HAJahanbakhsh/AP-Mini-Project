@@ -1,6 +1,8 @@
 import json
 import os
 import logging
+import platform
+import msvcrt
 import re
 import uuid
 from datetime import datetime, timedelta
@@ -8,6 +10,19 @@ from rich.console import Console
 from rich.table import Table
 from enum import Enum
 import bcrypt
+
+
+def getch():
+    print("\nPress any key to continue...")
+    if platform.system() == "Windows":
+        msvcrt.getch()
+    else:
+        os.system('read -n 1 -s -r -p ""')
+
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 logging.basicConfig(
     filename='project_management.log',
@@ -134,22 +149,26 @@ class ProjectManagementSystem:
             json.dump(data, file, indent=4)
 
     def main_menu(self):
-        console.print("[bold blue]Project Management System[/bold blue]")
-        console.print("1. Register")
-        console.print("2. Login")
+        while True:
+            cls()
+            console.print("[bold blue]Project Management System[/bold blue]")
+            console.print("1. Register")
+            console.print("2. Login")
 
-        choice = input("Enter your choice: ")
-        if choice == "1":
-            User.register()
-        elif choice == "2":
-            user = User.login()
-            if user:
-                self.user_menu(user)
-        else:
-            console.print("Invalid choice.", style="bold red")
+            choice = input("Enter your choice: ")
+            if choice == "1":
+                User.register()
+            elif choice == "2":
+                user = User.login()
+                if user:
+                    self.user_menu(user)
+            else:
+                console.print("Invalid choice.", style="bold red")
+                getch()
 
     def user_menu(self, user):
         while True:
+            cls()
             console.print(f"[bold blue]Welcome, {user.username}[/bold blue]")
             console.print("1. Create Project")
             console.print("2. View Projects")
@@ -158,12 +177,14 @@ class ProjectManagementSystem:
             choice = input("Enter your choice: ")
             if choice == "1":
                 self.create_project(user)
+                getch()
             elif choice == "2":
                 self.list_projects(user)
             elif choice == "3":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
+                getch()
 
     def create_project(self, user):
         project_name = input("Project Name: ")
@@ -198,6 +219,7 @@ class ProjectManagementSystem:
 
     def project_menu(self, user, project):
         while True:
+            cls()
             console.print(f"[bold blue]Project: {project['name']}[/bold blue]")
             console.print("1. Add Member")
             console.print("2. Delete Project")
@@ -207,6 +229,7 @@ class ProjectManagementSystem:
             choice = input("Enter your choice: ")
             if choice == "1":
                 self.add_member(user, project)
+                getch()
             elif choice == "2":
                 self.delete_project(user, project)
                 break
@@ -216,6 +239,7 @@ class ProjectManagementSystem:
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
+                getch()
 
     def add_member(self, user, project):
         if project["owner"] != user.username:
@@ -250,6 +274,7 @@ class ProjectManagementSystem:
 
     def manage_tasks(self, user, project):
         while True:
+            cls()
             console.print(f"[bold blue]Manage Tasks for Project: {project['name']}[/bold blue]")
             console.print("1. Create Task")
             console.print("2. View Tasks")
@@ -258,12 +283,14 @@ class ProjectManagementSystem:
             choice = input("Enter your choice: ")
             if choice == "1":
                 self.create_task(user, project)
+                getch()
             elif choice == "2":
                 self.list_tasks(user, project)
             elif choice == "3":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
+                getch()
 
     def create_task(self, user, project):
         if user.username != project["owner"]:
@@ -308,6 +335,7 @@ class ProjectManagementSystem:
         for task in project["tasks"]:
             table.add_row(task["title"], task["status"], task["priority"], task["start_time"], task["end_time"])
 
+        cls()
         console.print(table)
         task_title = input("Enter task title (or 'back' to go back): ")
         if task_title == "back":
@@ -320,6 +348,7 @@ class ProjectManagementSystem:
 
     def task_menu(self, user, project, task):
         while True:
+            cls()
             console.print(f"[bold blue]Task: {task['title']}[/bold blue]")
             console.print("1. Change Status")
             console.print("2. Change Priority")
@@ -331,18 +360,24 @@ class ProjectManagementSystem:
             choice = input("Enter your choice: ")
             if choice == "1":
                 self.change_status(user, project, task)
+                getch()
             elif choice == "2":
                 self.change_priority(user, project, task)
+                getch()
             elif choice == "3":
                 self.add_comment(user, project, task)
+                getch()
             elif choice == "4":
                 self.assign_member_to_task(user, project, task)
+                getch()
             elif choice == "5":
                 self.view_comments(task)
+                getch()
             elif choice == "6":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
+                getch()
 
     def change_status(self, user, project, task):
         if user.username != project["owner"] and user.username not in task["assignees"]:
@@ -414,8 +449,6 @@ class ProjectManagementSystem:
             for comment in task["comments"]:
                 console.print(
                     f"[bold yellow]{comment['timestamp']} - {comment['username']}:[/bold yellow] {comment['comment']}")
-
-
 
 
 if __name__ == "__main__":
