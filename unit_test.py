@@ -1,7 +1,10 @@
 import unittest
 from unittest.mock import patch, mock_open, MagicMock
 import uuid
-from main import ProjectManagementSystem
+from datetime import datetime, timedelta
+import re
+import bcrypt
+from main import ProjectManagementSystem , User
 
 
 class TestProjectManagementSystem(unittest.TestCase):
@@ -66,3 +69,35 @@ class TestProjectManagementSystem(unittest.TestCase):
         self.assertEqual(project["tasks"][0]["id"], '12345678-1234-5678-1234-567812345678')
         mock_save_data.assert_called_once()
 
+
+class TestUser(unittest.TestCase):
+
+    @patch('builtins.input', side_effect=['testuser', 'password123'])
+    @patch.object(ProjectManagementSystem, 'load_data', return_value={
+        "users": [{"email": "test@example.com", "username": "testuser", "password": bcrypt.hashpw('password123'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), "active": True}]
+    })
+    def test_login_success(self, mock_load_data, mock_input):
+        user = User.login()
+        self.assertIsNotNone(user)
+        self.assertEqual(user.username, "testuser")
+        self.assertEqual(user.email, "test@example.com")
+
+    @patch('builtins.input', side_effect=['testuser', 'wrongpassword'])
+    @patch.object(ProjectManagementSystem, 'load_data', return_value={
+        "users": [{"email": "test@example.com", "username": "testuser", "password": bcrypt.hashpw('password123'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), "active": True}]
+    })
+    def test_login_incorrect_password(self, mock_load_data, mock_input):
+        user = User.login()
+        self.assertIsNone(user)
+
+    @patch('builtins.input', side_effect=['inactiveuser', 'password123'])
+    @patch.object(ProjectManagementSystem, 'load_data', return_value={
+        "users": [{"email": "inactive@example.com", "username": "inactiveuser", "password": bcrypt.hashpw('password123'.encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), "active": False}]
+    })
+    def test_login_inactive_user(self, mock_load_data, mock_input):
+        user = User.login()
+        self.assertIsNone(user)
+
+
+if __name__ == '__main__':
+    unittest.main()
