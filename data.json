@@ -5,6 +5,30 @@
             "username": "abol",
             "password": "$2b$12$b40qDsMvIglwxDavJsYc8e/GDQf1gBHMenmHABYRkzqSbufDVyYN2",
             "active": true
+        },
+        {
+            "email": "ali@gmail.com",
+            "username": "123",
+            "password": "$2b$12$dHBulL7WnacQLS2tzZRTOOWBcEK0Wh33dK5/yEQ7QlRJxbRsU/7bW",
+            "active": true
+        },
+        {
+            "email": "karim1@gmail.com",
+            "username": "karim",
+            "password": "$2b$12$1VjI86NTbLwCz5FXexXulu6U6.OOYnCKYl0vmCf4VBq10DsuWwV.q",
+            "active": true
+        },
+        {
+            "email": "hossein@gmail.com",
+            "username": "hossein",
+            "password": "$2b$12$0qoi2mC3N2oC9qdHrKXUUu6xa5pl6JUnOQKyOALpmqzwmHd362V9.",
+            "active": true
+        },
+        {
+            "email": "mehrgan1@gmail.com",
+            "username": "mehrgan",
+            "password": "$2b$12$ThVhOna6ERsQIHYfKi2J6.I4x6RXvQ1AhW2I0d3eRO2obAWa60u0.",
+            "active": true
         }
     ],
     "projects": [
@@ -61,6 +85,157 @@
             "name": "dd",
             "owner": "mehrgan",
             "tasks": [],
+            "members": [
+                "mehrgan"
+            ]
+        },
+        {
+            "id": "afa15ad2-233f-4d3c-a25f-49317369d914",
+            "name": "test",
+            "owner": "kimi",
+            "tasks": [
+                {
+                    "id": "94ddf99c-f37b-4172-9b75-505ddb7e941b",
+                    "title": "test1",
+                    "description": "aa",
+                    "start_time": "2024-05-23T15:52:28.896416",
+                    "end_time": "2024-05-24T15:52:28.896416",
+                    "assignees": [
+                        "karim"
+                    ],
+                    "priority": "HIGH",
+                    "status": "TODO",
+                    "comments": [
+                        {
+                            "username": "kimi",
+                            "comment": "jjjjj",
+                            "timestamp": "2024-05-23T15:53:03.357999"
+                        }
+                    ]
+                },
+                {
+                    "id": "a0f2f139-2294-4a09-91d6-2e16c7c1581d",
+                    "title": "aaa",
+                    "description": "ww",
+                    "start_time": "2024-05-23T15:53:49.343661",
+                    "end_time": "2024-05-24T15:53:49.343661",
+                    "assignees": [],
+                    "priority": "LOW",
+                    "status": "BACKLOG",
+                    "comments": []
+                }
+            ],
+            "members": [
+                "kimi",
+                "karim"
+            ]
+        },
+        {
+            "id": "d14f0ace-553e-4e8b-ba8b-7a31aa779e7e",
+            "name": "full",
+            "owner": "hamed",
+            "tasks": [
+                {
+                    "id": "e0eb4bc8-6447-452d-a46d-3908cf37606e",
+                    "title": "qq",
+                    "description": "hh",
+                    "start_time": "2024-05-23T16:13:24.009625",
+                    "end_time": "2024-05-24T16:13:24.009625",
+                    "assignees": [
+                        "karim"
+                    ],
+                    "priority": "LOW",
+                    "status": "DONE",
+                    "comments": [
+                        {
+                            "username": "karim",
+                            "comment": "hhhhh",
+                            "timestamp": "2024-05-23T16:15:14.265467"
+                        },
+                        {
+                            "username": "abol",
+                            "comment": "wwww",
+                            "timestamp": "2024-05-23T16:19:15.270032"
+                        }
+                    ]
+                }
+            ],
+            "members": [
+                "hamed",
+                "karim",
+                "abol"
+            ]
+        },
+        {
+            "id": "76d8b9b7-6258-4934-8bc7-c5acf441ef14",
+            "name": "hh",
+            "owner": "hamed",
+            "tasks": [],
+            "members": [
+                "hamed"
+            ]
+        },
+        {
+            "id": "4142b407-0cb4-4660-a7e2-4801cece7ca7",
+            "name": "ff",
+            "owner": "hossein",
+            "tasks": [
+                {
+                    "id": "80f586a5-4131-4d10-8826-e7c1a7462dc0",
+                    "title": "punch",
+                    "description": "hot",
+                    "start_time": "2024-05-26T00:03:21.050963",
+                    "end_time": "2024-05-27T00:03:21.050963",
+                    "assignees": [
+                        "karim"
+                    ],
+                    "priority": "MEDIUM",
+                    "status": "DONE",
+                    "comments": [
+                        {
+                            "username": "hossein",
+                            "comment": "hossein is here",
+                            "timestamp": "2024-05-26T00:04:02.166849"
+                        },
+                        {
+                            "username": "karim",
+                            "comment": "karim is here",
+                            "timestamp": "2024-05-26T00:07:39.239077"
+                        }
+                    ]
+                }
+            ],
+            "members": [
+                "hossein",
+                "karim"
+            ]
+        },
+        {
+            "id": "3804506a-09fc-471c-a141-43ef50153992",
+            "name": "jj",
+            "owner": "mehrgan",
+            "tasks": [],
+            "members": [
+                "mehrgan"
+            ]
+        },
+        {
+            "id": "52032114-1a3e-493e-8a5e-a2afcb4e1c2f",
+            "name": "hour",
+            "owner": "mehrgan",
+            "tasks": [
+                {
+                    "id": "da7571e4-4920-4dba-a20c-b30ea4a5e392",
+                    "title": "minute",
+                    "description": "dd",
+                    "start_time": "2024-05-27T01:37:32.675113",
+                    "end_time": "2024-05-28T01:37:32.675113",
+                    "assignees": [],
+                    "priority": "LOW",
+                    "status": "BACKLOG",
+                    "comments": []
+                }
+            ],
             "members": [
                 "mehrgan"
             ]

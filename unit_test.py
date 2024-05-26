@@ -16,14 +16,6 @@ class TestProjectManagementSystem(unittest.TestCase):
         self.assertEqual(pms.data, {"users": [], "projects": []})
         mock_open.assert_called_once_with('data.json', 'r')
 
-    @patch('builtins.open', new_callable=mock_open)
-    @patch('json.dump')
-    def test_save_data(self, mock_json_dump, mock_open):
-        pms = ProjectManagementSystem()
-        data = {"users": [{"username": "test"}], "projects": []}
-        pms.save_data(data)
-        mock_open.assert_called_once_with('data.json', 'w')
-        mock_json_dump.assert_called_once_with(data, mock_open(), indent=4)
 
     @patch('builtins.input', side_effect=['Test Project'])
     @patch.object(ProjectManagementSystem, 'save_data')

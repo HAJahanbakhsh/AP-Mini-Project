@@ -23,3 +23,84 @@
 2024-05-23 13:58:16,641 - __main__ - INFO - Comment added to task test1 in project test by mehrgan
 2024-05-23 13:59:01,594 - __main__ - INFO - Project deleted: test by mehrgan
 2024-05-23 13:59:55,787 - __main__ - INFO - Project created: dd by mehrgan
+2024-05-23 15:40:47,885 - __main__ - INFO - New user registered: 123
+2024-05-23 15:43:27,153 - __main__ - INFO - New user registered: karim
+2024-05-23 15:51:16,144 - __main__ - INFO - New user registered: kimi
+2024-05-23 15:51:27,550 - __main__ - INFO - User logged in: kimi
+2024-05-23 15:51:43,278 - __main__ - INFO - Project created: test by kimi
+2024-05-23 15:52:28,896 - __main__ - INFO - Task created: test1 in project test by kimi
+2024-05-23 15:52:46,921 - __main__ - INFO - Status of task test1 in project test changed to TODO by kimi
+2024-05-23 15:52:54,520 - __main__ - INFO - Priority of task test1 in project test changed to HIGH by kimi
+2024-05-23 15:53:03,368 - __main__ - INFO - Comment added to task test1 in project test by kimi
+2024-05-23 15:53:14,283 - __main__ - INFO - Member karim assigned to task test1 in project test by kimi
+2024-05-23 15:53:49,343 - __main__ - INFO - Task created: aaa in project test by kimi
+2024-05-23 15:55:03,012 - __main__ - WARNING - Failed login attempt: ww
+2024-05-23 16:11:44,572 - __main__ - INFO - New user registered: hamed
+2024-05-23 16:11:57,911 - __main__ - INFO - User logged in: hamed
+2024-05-23 16:12:19,067 - __main__ - INFO - Project created: full by hamed
+2024-05-23 16:12:34,092 - __main__ - INFO - Project created: hh by hamed
+2024-05-23 16:13:24,009 - __main__ - INFO - Task created: qq in project full by hamed
+2024-05-23 16:13:46,857 - __main__ - INFO - Member karim assigned to task qq in project full by hamed
+2024-05-23 16:14:17,750 - __main__ - INFO - User logged in: karim
+2024-05-23 16:14:42,380 - __main__ - WARNING - Unauthorized task creation attempt by karim on project full
+2024-05-23 16:14:58,753 - __main__ - WARNING - Unauthorized member assignment attempt by karim on task qq in project full
+2024-05-23 16:15:14,265 - __main__ - INFO - Comment added to task qq in project full by karim
+2024-05-23 16:15:31,581 - __main__ - INFO - Status of task qq in project full changed to DONE by karim
+2024-05-23 16:15:48,285 - __main__ - WARNING - Unauthorized member assignment attempt by karim on task qq in project full
+2024-05-23 16:16:28,858 - __main__ - WARNING - Failed login attempt: abol
+2024-05-23 16:16:39,323 - __main__ - WARNING - Failed login attempt: abol
+2024-05-23 16:16:57,739 - __main__ - INFO - User logged in: abol
+2024-05-23 16:19:15,270 - __main__ - INFO - Comment added to task qq in project full by abol
+2024-05-23 16:19:23,891 - __main__ - WARNING - Unauthorized status change attempt by abol on task qq in project full
+2024-05-25 21:02:52,120 - main - INFO - Project created: Test Project by testuser
+2024-05-25 21:02:52,123 - main - INFO - Task created: Test Task in project Test Project by owner
+2024-05-25 21:02:52,451 - main - WARNING - Inactive account login attempt: inactiveuser
+2024-05-25 21:04:58,634 - main - INFO - Project created: Test Project by testuser
+2024-05-25 21:04:58,634 - main - INFO - Task created: Test Task in project Test Project by owner
+2024-05-25 21:04:58,926 - main - WARNING - Inactive account login attempt: inactiveuser
+2024-05-25 21:05:02,840 - main - WARNING - Failed login attempt: testuser
+2024-05-25 21:05:04,370 - main - INFO - User logged in: testuser
+2024-05-25 21:06:45,161 - main - INFO - Project created: Test Project by testuser
+2024-05-25 21:06:45,169 - main - INFO - Task created: Test Task in project Test Project by owner
+2024-05-25 21:06:45,458 - main - WARNING - Inactive account login attempt: inactiveuser
+2024-05-25 21:06:49,428 - main - WARNING - Failed login attempt: testuser
+2024-05-25 21:06:50,539 - main - INFO - User logged in: testuser
+2024-05-25 21:09:59,086 - main - INFO - Project created: Test Project by testuser
+2024-05-25 21:09:59,086 - main - INFO - Task created: Test Task in project Test Project by owner
+2024-05-25 21:09:59,385 - main - WARNING - Inactive account login attempt: inactiveuser
+2024-05-25 21:10:04,118 - main - WARNING - Failed login attempt: testuser
+2024-05-25 21:10:05,049 - main - INFO - User logged in: testuser
+2024-05-25 21:11:09,303 - main - INFO - Project created: Test Project by testuser
+2024-05-25 21:11:09,319 - main - INFO - Task created: Test Task in project Test Project by owner
+2024-05-25 21:11:09,629 - main - WARNING - Inactive account login attempt: inactiveuser
+2024-05-25 21:11:12,309 - main - WARNING - Failed login attempt: testuser
+2024-05-25 21:11:13,453 - main - INFO - User logged in: testuser
+2024-05-25 21:12:03,336 - main - INFO - Project created: Test Project by testuser
+2024-05-25 21:12:03,336 - main - INFO - Task created: Test Task in project Test Project by owner
+2024-05-25 21:12:03,635 - main - WARNING - Inactive account login attempt: inactiveuser
+2024-05-25 21:12:05,782 - main - WARNING - Failed login attempt: testuser
+2024-05-25 21:12:06,792 - main - INFO - User logged in: testuser
+2024-05-26 00:01:30,722 - __main__ - INFO - New user registered: hossein
+2024-05-26 00:01:45,465 - __main__ - INFO - User logged in: hossein
+2024-05-26 00:02:24,228 - __main__ - INFO - Project created: ff by hossein
+2024-05-26 00:03:21,053 - __main__ - INFO - Task created: punch in project ff by hossein
+2024-05-26 00:03:42,201 - __main__ - INFO - Member karim assigned to task punch in project ff by hossein
+2024-05-26 00:04:02,168 - __main__ - INFO - Comment added to task punch in project ff by hossein
+2024-05-26 00:04:18,226 - __main__ - INFO - Status of task punch in project ff changed to TODO by hossein
+2024-05-26 00:04:31,105 - __main__ - INFO - Priority of task punch in project ff changed to MEDIUM by hossein
+2024-05-26 00:06:01,793 - __main__ - INFO - User logged in: karim
+2024-05-26 00:06:51,075 - __main__ - WARNING - Unauthorized task creation attempt by karim on project ff
+2024-05-26 00:07:16,264 - __main__ - INFO - Status of task punch in project ff changed to DONE by karim
+2024-05-26 00:07:39,242 - __main__ - INFO - Comment added to task punch in project ff by karim
+2024-05-26 00:09:39,012 - __main__ - INFO - New user registered: hossein
+2024-05-26 00:09:50,142 - __main__ - INFO - User logged in: hossein
+2024-05-27 01:08:23,474 - __main__ - INFO - New user registered: mehrgan
+2024-05-27 01:08:34,672 - __main__ - INFO - User logged in: mehrgan
+2024-05-27 01:08:53,179 - __main__ - INFO - Project created: jj by mehrgan
+2024-05-27 01:10:32,690 - __main__ - WARNING - Attempt to register with existing email or username: karim@gmail.com, karim
+2024-05-27 01:10:47,812 - __main__ - WARNING - Failed login attempt: mehrgan
+2024-05-27 01:11:11,992 - __main__ - INFO - New user registered: mehrgan
+2024-05-27 01:11:33,317 - __main__ - INFO - User logged in: mehrgan
+2024-05-27 01:35:53,590 - __main__ - INFO - User logged in: mehrgan
+2024-05-27 01:36:01,668 - __main__ - INFO - Project created: hour by mehrgan
+2024-05-27 01:37:32,678 - __main__ - INFO - Task created: minute in project hour by mehrgan

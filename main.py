@@ -172,6 +172,7 @@ class Project:
 class ProjectManagementSystem:
     def __init__(self):
         self.data = self.load_data()
+        self.history_manager = HistoryManager()
 
     @staticmethod
     def load_data():
