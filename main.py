@@ -49,6 +49,37 @@ class Status(Enum):
     ARCHIVED = "ARCHIVED"
 
 
+class HistoryManager:
+    def __init__(self, history_file='history.json'):
+        self.history_file = history_file
+        if not os.path.exists(self.history_file):
+            with open(self.history_file, 'w') as file:
+                json.dump({}, file)
+
+    def add_history(self, task_id, user, action):
+        with open(self.history_file, 'r') as file:
+            history_data = json.load(file)
+
+        if task_id not in history_data:
+            history_data[task_id] = []
+
+        timestamp = datetime.now().isoformat()
+        history_data[task_id].append({
+            "user": user,
+            "action": action,
+            "timestamp": timestamp
+        })
+
+        with open(self.history_file, 'w') as file:
+            json.dump(history_data, file, indent=4)
+
+    def get_history(self, task_id):
+        with open(self.history_file, 'r') as file:
+            history_data = json.load(file)
+
+        return history_data.get(task_id, [])
+
+
 class User:
     def __init__(self, email, username, password, active=True):
         self.email = email
