@@ -428,6 +428,7 @@ class ProjectManagementSystem:
         new_status = input("Enter new status: ").upper()
         if new_status in Status.__members__:
             task["status"] = new_status
+            self.history_manager.add_history(task['id'], user.username, f"Changed status to {new_status}")
             self.save_data(self.data)
             console.print("Task status updated successfully.", style="bold green")
             logger.info("Status of task %s in project %s changed to %s by %s", task["title"], project["name"],new_status, user.username)
@@ -444,6 +445,7 @@ class ProjectManagementSystem:
         new_priority = input("Enter new priority: ").upper()
         if new_priority in Priority.__members__:
             task["priority"] = new_priority
+            self.history_manager.add_history(task['id'], user.username, f"Changed priority to {new_priority}")
             self.save_data(self.data)
             console.print("Task priority updated successfully.", style="bold green")
             logger.info("Priority of task %s in project %s changed to %s by %s", task["title"], project["name"],new_priority, user.username)
@@ -458,6 +460,7 @@ class ProjectManagementSystem:
             "timestamp": datetime.now().isoformat()
         }
         task["comments"].append(new_comment)
+        self.history_manager.add_history(task['id'],user.username, f"add new comment: {new_comment['comment']}")
         self.save_data(self.data)
         console.print("Comment added successfully.", style="bold green")
         logger.info("Comment added to task %s in project %s by %s", task["title"], project["name"], user.username)
@@ -472,6 +475,7 @@ class ProjectManagementSystem:
         if assignee in project["members"]:
             if assignee not in task["assignees"]:
                 task["assignees"].append(assignee)
+                self.history_manager.add_history(task['id'], user.username, f"Assigned member {assignee}")
                 self.save_data(self.data)
                 console.print("Member assigned to task successfully.", style="bold green")
                 logger.info("Member %s assigned to task %s in project %s by %s", assignee, task["title"],project["name"], user.username)
