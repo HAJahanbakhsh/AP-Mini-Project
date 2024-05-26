@@ -393,8 +393,8 @@ class ProjectManagementSystem:
             console.print("2. Change Priority")
             console.print("3. Add Comment")
             console.print("4. Assign Member")
-            console.print("5. View Comments")
-            console.print("6. Back")
+            console.print("6. View History")
+            console.print("7. Back")
 
             choice = input("Enter your choice: ")
             if choice == "1":
@@ -413,6 +413,9 @@ class ProjectManagementSystem:
                 self.view_comments(task)
                 getch()
             elif choice == "6":
+                self.view_history(task)
+                getch()    
+            elif choice == "7":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
@@ -492,6 +495,17 @@ class ProjectManagementSystem:
             for comment in task["comments"]:
                 console.print(
                     f"[bold yellow]{comment['timestamp']} - {comment['username']}:[/bold yellow] {comment['comment']}")
+
+    def view_history(self, task):
+        console.print(f"[bold blue]History for Task: {task['title']}[/bold blue]")
+        table = Table(title="Task History")
+        table.add_column("User", justify="center")
+        table.add_column("Action", justify="center")
+        table.add_column("Timestamp", justify="center")
+        for entry in self.history_manager.get_history(task['id']):
+            table.add_row(entry["user"], entry["action"], entry["timestamp"])
+
+        console.print(table)
 
 
 if __name__ == "__main__":
