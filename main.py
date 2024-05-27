@@ -89,6 +89,7 @@ class User:
 
 
     @staticmethod
+    # Initializes a new user with email, username, hashed password, and active status.
     def register():
         data = ProjectManagementSystem.load_data()
         email = input("Email: ")
@@ -106,7 +107,7 @@ class User:
                 logger.warning("Attempt to register with existing email or username: %s, %s", email, username)
                 getch()
                 return
-
+        # Hashes the password for security
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         new_user = User(email, username, hashed_password)
         data["users"].append(new_user.__dict__)
@@ -117,11 +118,13 @@ class User:
 
     @staticmethod
     def login():
+        # Loads existing data from the project management system
         data = ProjectManagementSystem.load_data()
         username = input("Username: ")
         password = input("Password: ")
 
         for user_data in data["users"]:
+            # Verifies the password and username
             if user_data["username"] == username and bcrypt.checkpw(password.encode('utf-8'), user_data["password"].encode('utf-8')):
                 if not user_data["active"]:
                     console.print("Your account is inactive.", style="bold red")
@@ -131,7 +134,7 @@ class User:
                 console.print("Login successful.", style="bold green")
                 logger.info("User logged in: %s", username)
                 getch()
-                return User(**user_data)
+                return User(**user_data) # Returns a User object if login is successful
 
         console.print("Incorrect username or password.", style="bold red")
         logger.warning("Failed login attempt: %s", username)
@@ -154,7 +157,8 @@ class Task:
 
 class Project:
     def __init__(self, name, owner):
-        self.id = str(uuid.uuid4())
+        # Initializes a new project with a unique ID, name, owner, an empty list of tasks, and members list containing the owner.
+        self.id = str(uuid.uuid4())# Generates a unique ID for the project
         self.name = name
         self.owner = owner
         self.tasks = []
@@ -165,6 +169,7 @@ class Project:
             self.members.append(username)
 
     def create_task(self, title, description, start_time, end_time):
+        # Creates a new task and adds it to the project's task list
         new_task = Task(title, description, start_time, end_time)
         self.tasks.append(new_task.__dict__)
         return new_task
@@ -172,11 +177,13 @@ class Project:
 
 class ProjectManagementSystem:
     def __init__(self):
+        # Initializes the project management system, loading data and initializing the history manager.
         self.data = self.load_data()
         self.history_manager = HistoryManager()
 
     @staticmethod
     def load_data():
+        # Loads data from a JSON file if it exists, otherwise returns default structure.
         if os.path.exists('data.json'):
             with open('data.json', 'r') as file:
                 return json.load(file)
@@ -225,6 +232,7 @@ class ProjectManagementSystem:
                 console.print("Invalid choice.", style="bold red")
                 getch()
 
+    # Prompts the user to enter a project name and creates a new project.
     def create_project(self, user):
         project_name = input("Project Name: ")
         new_project = Project(project_name, user.username)
@@ -338,7 +346,7 @@ class ProjectManagementSystem:
             logger.warning("Unauthorized task creation attempt by %s on project %s", user.username, project["name"])
             getch()
             return
-
+        # Gather task details from the user
         task_id = str(uuid.uuid4())
         title = input("Task Title: ")
         description = input("Task Description: ")
@@ -424,6 +432,7 @@ class ProjectManagementSystem:
                 getch()
 
     def change_status(self, user, project, task):
+        # Allows the project owner or assigned members to change the status of a task
         if user.username != project["owner"] and user.username not in task["assignees"]:
             console.print("Only the project owner or assigned members can change the task status.", style="bold red")
             logger.warning("Unauthorized status change attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
@@ -441,6 +450,7 @@ class ProjectManagementSystem:
             console.print("Invalid status.", style="bold red")
 
     def change_priority(self, user, project, task):
+        # Allows the project owner or assigned members to change the priority of a task.
         if user.username != project["owner"] and user.username not in task["assignees"]:
             console.print("Only the project owner or assigned members can change the task priority.", style="bold red")
             logger.warning("Unauthorized priority change attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
@@ -471,6 +481,7 @@ class ProjectManagementSystem:
         logger.info("Comment added to task %s in project %s by %s", task["title"], project["name"], user.username)
 
     def assign_member_to_task(self, user, project, task):
+        # Allows the project owner to assign members to a task.
         if user.username != project["owner"]:
             console.print("Only the project owner can assign members to tasks.", style="bold red")
             logger.warning("Unauthorized member assignment attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
@@ -499,6 +510,7 @@ class ProjectManagementSystem:
                     f"[bold yellow]{comment['timestamp']} - {comment['username']}:[/bold yellow] {comment['comment']}")
 
     def view_history(self, task):
+        # Displays the history of actions taken on a specific task.
         console.print(f"[bold blue]History for Task: {task['title']}[/bold blue]")
         table = Table(title="Task History")
         table.add_column("User", justify="center")
