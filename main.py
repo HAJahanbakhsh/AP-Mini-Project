@@ -272,7 +272,8 @@ class ProjectManagementSystem:
             console.print("1. Add Member")
             console.print("2. Delete Project")
             console.print("3. Manage Tasks")
-            console.print("4. Back")
+            console.print("4. Remove Member")
+            console.print("5. Back")
 
             choice = input("Enter your choice: ")
             if choice == "1":
@@ -284,6 +285,9 @@ class ProjectManagementSystem:
             elif choice == "3":
                 self.manage_tasks(user, project)
             elif choice == "4":
+                self.remove_member(user, project)
+                getch()    
+            elif choice == "5":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
@@ -309,6 +313,23 @@ class ProjectManagementSystem:
                 return
 
         console.print("User not found.", style="bold red")
+
+
+    def remove_member(self, user, project):
+        if project["owner"] != user.username:
+            console.print("Only the project owner can remove members.", style="bold red")
+            return
+
+        username = input("Enter the username of the member to remove: ")
+
+        if username in project["members"]:
+            project["members"].remove(username)
+            self.save_data(self.data)
+            console.print("Member removed successfully.", style="bold green")
+        else:
+            console.print("User not a member of the project.", style="bold red")
+
+
 
     def delete_project(self, user, project):
         if project["owner"] != user.username:
