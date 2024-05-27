@@ -114,3 +114,7 @@
 2024-05-27 01:46:23,320 - __main__ - INFO - Comment added to task test1 in project test by karim
 2024-05-27 19:03:56,160 - __main__ - INFO - User logged in: mehrgan
 2024-05-27 19:05:31,710 - __main__ - INFO - User logged in: mehrgan
+2024-05-27 19:30:04,634 - __main__ - INFO - User logged in: mehrgan
+2024-05-27 19:30:57,293 - __main__ - INFO - Member 123 assigned to task minute in project hour by mehrgan
+2024-05-27 19:31:25,105 - __main__ - INFO - Comment added to task minute in project hour by mehrgan
+2024-05-27 21:58:13,092 - __main__ - INFO - User logged in: mehrgan

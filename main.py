@@ -557,14 +557,17 @@ class ProjectManagementSystem:
     def remove_assignees(self, user, project,task):
         if project["owner"] != user.username:
             console.print("Only the project owner can remove members.", style="bold red")
+            logger.warning("Unauthorized member deleting attempt by %s on task %s in project %s", user.username,task["title"], project["name"])
             return
 
         username = input("Enter the username of the member to remove: ")
 
         if username in task["assignees"]:
             task["assignees"].remove(username)
+            self.history_manager.add_history(task['id'], user.username, f"Delete member {username}")
             self.save_data(self.data)
             console.print("Member removed successfully.", style="bold green")
+            logger.info("Member %s deleted from task %s in project %s by %s", username, task["title"],project["name"], user.username)
         else:
             console.print("User not a member of the project.", style="bold red")
 
