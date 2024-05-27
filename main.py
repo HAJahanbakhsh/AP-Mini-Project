@@ -273,7 +273,8 @@ class ProjectManagementSystem:
             console.print("2. Delete Project")
             console.print("3. Manage Tasks")
             console.print("4. Remove Member")
-            console.print("5. Back")
+            console.print("5. List of Members")
+            console.print("6. Back")
 
             choice = input("Enter your choice: ")
             if choice == "1":
@@ -288,6 +289,9 @@ class ProjectManagementSystem:
                 self.remove_member(user, project)
                 getch()    
             elif choice == "5":
+                self.list_members(user, project)
+                getch()
+            elif choice == "6":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
@@ -328,6 +332,16 @@ class ProjectManagementSystem:
             console.print("Member removed successfully.", style="bold green")
         else:
             console.print("User not a member of the project.", style="bold red")
+
+    def list_members(self, user, project):
+        table = Table(title=f"Members of Project: {project['name']}")
+        table.add_column("Username", justify="center")
+
+        for member in project["members"]:
+            table.add_row(member)
+
+        cls()
+        console.print(table)
 
 
 
