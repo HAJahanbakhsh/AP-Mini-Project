@@ -104,3 +104,11 @@
 2024-05-27 01:35:53,590 - __main__ - INFO - User logged in: mehrgan
 2024-05-27 01:36:01,668 - __main__ - INFO - Project created: hour by mehrgan
 2024-05-27 01:37:32,678 - __main__ - INFO - Task created: minute in project hour by mehrgan
+2024-05-27 01:42:56,924 - __main__ - INFO - User logged in: mehrgan
+2024-05-27 01:43:17,820 - __main__ - INFO - Status of task minute in project hour changed to TODO by mehrgan
+2024-05-27 01:43:30,821 - __main__ - INFO - Comment added to task minute in project hour by mehrgan
+2024-05-27 01:43:49,568 - __main__ - INFO - Member mehrgan assigned to task minute in project hour by mehrgan
+2024-05-27 01:45:18,325 - __main__ - WARNING - Failed login attempt: ali
+2024-05-27 01:45:26,125 - __main__ - WARNING - Failed login attempt: karim
+2024-05-27 01:45:33,381 - __main__ - INFO - User logged in: karim
+2024-05-27 01:46:23,320 - __main__ - INFO - Comment added to task test1 in project test by karim

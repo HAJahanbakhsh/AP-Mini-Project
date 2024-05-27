@@ -48,7 +48,7 @@ class Status(Enum):
     DONE = "DONE"
     ARCHIVED = "ARCHIVED"
 
-
+#class for save data in history file and load data 
 class HistoryManager:
     def __init__(self, history_file='history.json'):
         self.history_file = history_file
@@ -86,6 +86,7 @@ class User:
         self.username = username
         self.password = password
         self.active = active
+
 
     @staticmethod
     def register():
