@@ -423,9 +423,12 @@ class ProjectManagementSystem:
             console.print("1. Change Status")
             console.print("2. Change Priority")
             console.print("3. Add Comment")
-            console.print("4. Assign Member")
-            console.print("6. View History")
-            console.print("7. Back")
+            console.print("4. View Comments")
+            console.print("5. Assign Member")
+            console.print("6. Remove Member")
+            console.print("7. List of Assigned Members")
+            console.print("8. View History")
+            console.print("9. Back")
 
             choice = input("Enter your choice: ")
             if choice == "1":
@@ -437,16 +440,22 @@ class ProjectManagementSystem:
             elif choice == "3":
                 self.add_comment(user, project, task)
                 getch()
-            elif choice == "4":
+            elif choice == "5":
                 self.assign_member_to_task(user, project, task)
                 getch()
-            elif choice == "5":
+            elif choice == "6":
+                self.remove_assignees(user,project,task)
+                getch()
+            elif choice == "4":
                 self.view_comments(task)
                 getch()
-            elif choice == "6":
+            elif choice == "8":
                 self.view_history(task)
                 getch()    
             elif choice == "7":
+                self.list_assignees(task)
+                getch()
+            elif choice == "9":
                 break
             else:
                 console.print("Invalid choice.", style="bold red")
@@ -520,6 +529,30 @@ class ProjectManagementSystem:
                 console.print("Member is already assigned to this task.", style="bold red")
         else:
             console.print("User is not a member of this project.", style="bold red")
+            
+    def list_assignees(self, task):
+        table = Table(title=f"Members for Task: {task['title']}")
+        table.add_column("Username", justify="center")
+
+        for member in task["assignees"]:
+            table.add_row(member)
+
+        cls()
+        console.print(table)
+
+    def remove_assignees(self, user, project,task):
+        if project["owner"] != user.username:
+            console.print("Only the project owner can remove members.", style="bold red")
+            return
+
+        username = input("Enter the username of the member to remove: ")
+
+        if username in task["assignees"]:
+            task["assignees"].remove(username)
+            self.save_data(self.data)
+            console.print("Member removed successfully.", style="bold green")
+        else:
+            console.print("User not a member of the project.", style="bold red")
 
     @staticmethod
     def view_comments(task):
