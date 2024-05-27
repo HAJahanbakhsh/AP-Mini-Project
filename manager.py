@@ -57,6 +57,15 @@ def deactivate_user(username):
     print(f"User {username} not found.")
 
 
+def purge_data():
+    if os.path.exists('data.json'):
+        with open('data.json', 'w') as file:
+            json.dump({'users': [], 'projects': []}, file)
+        print("All data purged.")
+    else:
+        print("No data to purge.")    
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Admin Management")
     subparsers = parser.add_subparsers(dest='command')
@@ -71,6 +80,8 @@ if __name__ == "__main__":
     deactivate_user_parser = subparsers.add_parser('deactivate-user', help='Deactivate a user account')
     deactivate_user_parser.add_argument('--username', required=True, help='Username to deactivate')
 
+    purge_data_parser = subparsers.add_parser('purge-data', help='Purge all stored data')
+
     args = parser.parse_args()
 
     if args.command == 'create-admin':
@@ -79,5 +90,14 @@ if __name__ == "__main__":
         activate_user(args.username)
     elif args.command == 'deactivate-user':
         deactivate_user(args.username)
+    elif args.command == 'purge-data':
+        purge_data()    
     else:
         parser.print_help()
+
+
+
+#python manager.py activate-user --username user1
+#python manager.py create-admin --username admin --password adminpass
+#python manager.py deactivate-user --username user1
+#python3 manager.py purge-data
